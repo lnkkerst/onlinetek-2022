@@ -5,24 +5,6 @@ function setRem() {
     $(".bg").css("height", t)
 }
 
-function bgmInit() {
-    let e = document.getElementById("bgm");
-    if (!e.paused) {
-        document.getElementById("bgm-box").classList.add("loop")
-    }
-}
-
-function bgmToggle() {
-    let e = document.getElementById("bgm");
-    if (!e.paused) {
-        document.getElementById("bgm").pause();
-        document.getElementById("bgm-box").classList.remove("loop")
-    } else {
-        document.getElementById("bgm").play();
-        document.getElementById("bgm-box").classList.add("loop")
-    }
-}
-
 function reAnimate(e, t) {
     $(e).removeClass("animated").addClass("animated " + t).one("webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend", function (e) {
         return function () {

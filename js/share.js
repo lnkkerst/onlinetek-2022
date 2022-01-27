@@ -35,6 +35,7 @@ $("document").ready(function () {
             let output = new Image();
             output.src = $("#canvas")[0].toDataURL("image/jpg");
             $("body").append(output);
+            $(".loading").hide();
         }
         qrImg.src = "../assets/img/share/qr.jpg";
     };
