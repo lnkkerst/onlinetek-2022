@@ -33,7 +33,7 @@ function createSelectOption(e, t, n) {
         $(n).parent().children().css("border-bottom-width", "0.5rem");
         $(n).css("border-top-width", "0.5rem");
         $(n).css("border-bottom-width", "0");
-        setTimeout("$('#box').fullpage.moveSectionDown()",300);
+        setTimeout("$('#box').fullpage.moveSectionDown()", 300);
         selected[e] = t
     }
 }
@@ -120,7 +120,12 @@ function eventBind() {
 }
 
 function pluginInit() {
-    $("#box").fullpage({scrollBar: true, resize: true, scrollingSpeed: 1e3});
+    $("#box").fullpage({
+        scrollBar: false,
+        resize: true,
+        scrollingSpeed: 1e3,
+        lazyLoading: false,
+    });
     let e = new WOW({boxClass: "wow", animateClass: "animated", offset: 0, mobile: true, live: true});
     e.init();
     $("#box").fullpage.setAllowScrolling(false);
