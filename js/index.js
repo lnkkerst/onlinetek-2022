@@ -121,10 +121,11 @@ function eventBind() {
 
 function pluginInit() {
     $("#box").fullpage({
-        scrollBar: false,
+        scrollBar: true,
         resize: true,
         scrollingSpeed: 1e3,
         lazyLoading: false,
+        recordHistory: false,
     });
     let e = new WOW({boxClass: "wow", animateClass: "animated", offset: 0, mobile: true, live: true});
     e.init();
