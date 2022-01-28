@@ -1,7 +1,13 @@
 @import url(loading.css);
 
+@font-face {
+    font-family: 'XingKai';
+    src: url('../assets/font/HuaWenXingKai-1.woff2') format('woff2');
+}
+
 canvas {
-    display: none
+    font-family: "XingKai", serif;
+    display: none;
 }
 
 img {
@@ -24,4 +30,9 @@ img {
     align-self: center;
     color: #fff;
     text-align: center
+}
+
+#reserved {
+    font-family: "XingKai", serif;
+    /*display: none;*/
 }

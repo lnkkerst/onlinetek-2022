@@ -10,34 +10,66 @@ function getParams() {
     return results;
 }
 
-function drawImageFile(ctx, files, now) {
-    let img = new Image();
-    now = now || 0;
-    let x = files[now][1] || 0;
-    let y = files[now][2] || 0;
-    img.onload = function () {
-        ctx.drawImage(img, x, y);
-        drawImageFile(ctx, files, now + 1)
-    };
-    img.src = files[now][0];
+function drawImageFile(ctx, imgFile, x, y) {
+    return new Promise(function (resolve, reject) {
+        let img = new Image();
+        x = x || 0;
+        y = y || 0;
+        img.onload = function () {
+            ctx.drawImage(img, x, y);
+            resolve();
+        };
+        img.src = imgFile;
+    });
 }
 
 $("document").ready(function () {
-    let params = getParams();
+    $("#reserved").hide(); // 隐藏加载字体占位元素
+    let params = getParams(); // 获取参数
     let c = document.getElementById("canvas");
-    let ctx = c.getContext("2d");
-    let bgImg = new Image();
-    bgImg.onload = function () {
-        ctx.drawImage(bgImg, 0, 0);
-        let qrImg = new Image();
-        qrImg.onload = function () {
-            ctx.drawImage(qrImg, 360, 780);
-            let output = new Image();
-            output.src = $("#canvas")[0].toDataURL("image/jpg");
-            $("body").append(output);
-            $(".loading").hide();
-        }
-        qrImg.src = "../assets/img/share/qr.jpg";
-    };
-    bgImg.src = "../assets/img/share/" + params["result"] + ".jpg";
+    let ctx = c.getContext("2d"); // 画笔
+    let resultId = (params["result"] || 0).toString();
+    let operation = params["operation"] || "share";
+    let result = resultList[resultId]["result"];
+    drawImageFile(ctx, `../assets/img/share/${resultId}-bg.jpg`).then(function () { // 画背景
+        return drawImageFile(ctx, `../assets/img/share/text-bg.png`, 0, 70);
+    }).then(function () { // 画半透明文本框
+        return drawImageFile(ctx, `../assets/img/share/${resultId}-text.png`);
+    }).then(function () { // 画字
+        return new Promise(function (resolve, reject) {
+            ctx.font = "36px XingKai";
+            for (let i = 0; i < result.length; ++i) {
+                ctx.fillText(result[i], 160, 280 + 80 * i);
+            }
+            resolve();
+        });
+    }).then(function () {
+        return new Promise(function (resolve, reject) {
+            ctx.fillStyle = "#ffffff88";
+            ctx.fillRect(20, 840, 500, 100);
+            resolve();
+        });
+    }).then(function () {
+        return drawImageFile(ctx, "../assets/img/share/yiban.png", 330, 852);
+    }).then(function () {
+        return drawImageFile(ctx, "../assets/img/share/sdu-online.png", 60, 857);
+    }).then(function () {
+        return new Promise(function (resolve, reject) {
+            if(operation === "share") {
+                ctx.fillRect(270, 760, 250, 80);
+                ctx.font = "20px san-serif";
+                ctx.fillStyle = "#000000";
+                ctx.fillText("扫码答题", 275, 790);
+                ctx.fillText("解锁新春签语", 275, 820);
+                drawImageFile(ctx, "../assets/img/share/qr.jpg", 400, 710).then(resolve);
+            } else {
+                resolve();
+            }
+        });
+    }).then(function () {  // 输出图片
+        let output = new Image();
+        output.src = $("#canvas")[0].toDataURL("image/jpg");
+        $("body").append(output);
+        $(".loading").hide();
+    });
 });
