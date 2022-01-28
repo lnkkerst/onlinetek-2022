@@ -9,9 +9,9 @@ function getParams() {
     return results;
 }
 
-function share() {
+function share(op) {
     let obj = getResultId();
-    let url = "../share/index.html?result=" + obj;
+    let url = "../share/index.html?result=" + obj + "&operation=" + op;
     window.open(url, "_self");
 }
 
