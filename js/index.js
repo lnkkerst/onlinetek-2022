@@ -51,7 +51,9 @@ function createSelectOption(e, t, n) {
         $(n).parent().children().css("border-bottom-width", "0.5rem");
         $(n).css("border-top-width", "0.5rem");
         $(n).css("border-bottom-width", "0");
+        $("#box").fullpage.setAllowScrolling(false);
         setTimeout("$('#box').fullpage.moveSectionDown()",300);
+        setTimeout("$('#box').fullpage.setAllowScrolling(true)",400);
         selected[e] = t
     }
 }
