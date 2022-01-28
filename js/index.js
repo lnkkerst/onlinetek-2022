@@ -5,6 +5,24 @@ function setRem() {
     $(".bg").css("height", t)
 }
 
+function bgmInit() {
+    let e = document.getElementById("bgm");
+    if (!e.paused) {
+        document.getElementById("bgm-box").classList.add("loop")
+    }
+}
+
+function bgmToggle() {
+    let e = document.getElementById("bgm");
+    if (!e.paused) {
+        document.getElementById("bgm").pause();
+        document.getElementById("bgm-box").classList.remove("loop")
+    } else {
+        document.getElementById("bgm").play();
+        document.getElementById("bgm-box").classList.add("loop")
+    }
+}
+
 function reAnimate(e, t) {
     $(e).removeClass("animated").addClass("animated " + t).one("webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend", function (e) {
         return function () {
@@ -33,7 +51,7 @@ function createSelectOption(e, t, n) {
         $(n).parent().children().css("border-bottom-width", "0.5rem");
         $(n).css("border-top-width", "0.5rem");
         $(n).css("border-bottom-width", "0");
-        setTimeout("$('#box').fullpage.moveSectionDown()", 300);
+        setTimeout("$('#box').fullpage.moveSectionDown()",300);
         selected[e] = t
     }
 }
@@ -78,13 +96,7 @@ function writeQuestions() {
     for (let n = 0; n < o.length; ++n) {
         for (let t = 0; t < 4; ++t) {
             let e = 1.7 + .3 * t;
-            if (questions[n]["answers"][t].length >= 7) {
-                {
-                    $(i[n]).append("<p class = 'option-text option-text-" + ["A", "B", "C", "D"][t] + " wow fadeIn" + "'" + " data-wow-delay='" + e + "s'" + " style='width:0.7rem !important;font-size:0.35rem !important;'>" + questions[n]["answers"][t] + "</p>")
-                }
-            } else {
-                $(i[n]).append("<p class = 'option-text option-text-" + ["A", "B", "C", "D"][t] + " wow fadeIn" + "'" + " data-wow-delay='" + e + "s'>" + questions[n]["answers"][t] + "</p>")
-            }
+            $(i[n]).append("<p class = 'option-text option-text-" + ["A", "B", "C", "D"][t] + " wow fadeIn" + "'" + " data-wow-delay='" + e + "s'>" + questions[n]["answers"][t] + "</p>") 
         }
     }
 }
@@ -120,13 +132,7 @@ function eventBind() {
 }
 
 function pluginInit() {
-    $("#box").fullpage({
-        scrollBar: true,
-        resize: true,
-        scrollingSpeed: 1e3,
-        lazyLoading: false,
-        recordHistory: false,
-    });
+    $("#box").fullpage({scrollBar: true, resize: true, scrollingSpeed: 1e3});
     let e = new WOW({boxClass: "wow", animateClass: "animated", offset: 0, mobile: true, live: true});
     e.init();
     $("#box").fullpage.setAllowScrolling(false);
