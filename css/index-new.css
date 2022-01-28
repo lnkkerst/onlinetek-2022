@@ -98,7 +98,7 @@ html, body {
 }
 
 .option-box p {
-    margin-bottom: .45rem;
+    margin-bottom: .4rem;
 }
 
 .option-box img {
@@ -106,13 +106,13 @@ html, body {
 }
 
 .option-text-block {
-    margin-top: 1.2rem;
+    margin-top: 1.3rem;
     position: absolute;
     width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    font-size: .4rem;
+    font-size: .39rem;
     z-index: 2;
     font-family: 'XingKai', serif;
 }
@@ -197,7 +197,7 @@ html, body {
 
 @media screen and (max-height: 800px) and (max-width: 450px) {
     .question-box {
-        height: 100% !important
+        height: 9rem !important
     }
 
     .img-question {
@@ -208,7 +208,6 @@ html, body {
     }
 
     .option-box {
-        margin-top: 0 !important;
         margin-bottom: 1rem !important
     }
 
@@ -247,11 +246,6 @@ html, body {
         margin-top: .15rem !important;
         font-size: .4rem !important
     }
-
-    .option-box {
-        margin-top: 0 !important
-    }
-
     .option-box img {
         width: 2rem !important
     }
