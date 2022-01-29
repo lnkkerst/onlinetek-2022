@@ -104,27 +104,13 @@ function eventBind() {
         $("#box").fullpage.setAllowScrolling(true)
     });
     $("#draw-button").on("click", function () {
-        let obj = getResultId();
-        if (obj !== "error") {
-            let img=document.getElementById("wobble-box");
-            $("#wobble-box").css("width","6rem");
-            let margin=img.style.marginTop-1.15*document.documentElement.clientWidth / 10;
-            $("#wobble-box").css("margin-top",margin);
-            img.src="assets/img/index/drawing.gif";
-            img.onload=function() {
-                setTimeout(function () {
-                    $("#wobble-box").css("width","7.1rem");
-                    let margin=img.style.marginTop-1.45*document.documentElement.clientWidth / 10;
-                    $("#wobble-box").css("margin-top",margin);
-                    img.src="assets/img/index/get-draw.gif";
-                    img.onload=function(){
-                        setTimeout(function () {
-                            let url = "result/index.html?result=" + obj;
-                            window.open(url, "_self");
-                        }, 1600);
-                    }
-                }, 1500);
-            }
+        let t = getResultId();
+        if (t !== "error") {
+            reAnimate("#wobble-box", "wobble");
+            setTimeout(function () {
+                let e = "result/index.html?result=" + t;
+                window.open(e, "_self")
+            }, 1500);
         }
     });
 }
