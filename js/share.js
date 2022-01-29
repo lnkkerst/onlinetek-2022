@@ -37,31 +37,28 @@ $("document").ready(function () {
         return drawImageFile(ctx, `../assets/img/share/${resultId}-text.png`);
     }).then(function () { // 画字
         return new Promise(function (resolve, reject) {
-            ctx.font = "36px XingKai";
+            ctx.font = "50px XingKai";
             for (let i = 0; i < result.length; ++i) {
-                ctx.fillText(result[i], 160, 280 + 80 * i);
+                ctx.fillText(result[i], 115, 295 + 76 * i);
             }
             resolve();
         });
     }).then(function () {
         return new Promise(function (resolve, reject) {
-            ctx.fillStyle = "#ffffff88";
-            ctx.fillRect(20, 840, 500, 100);
+            ctx.fillStyle = "rgba(255, 255, 255, 0.6)";
+            ctx.fillRect(0, 900, 540, 60);
             resolve();
         });
     }).then(function () {
-        return drawImageFile(ctx, "../assets/img/share/yiban.png", 330, 852);
+        return drawImageFile(ctx, "../assets/img/share/yiban.png", 130, 906);
     }).then(function () {
-        return drawImageFile(ctx, "../assets/img/share/sdu-online.png", 60, 857);
+        return drawImageFile(ctx, "../assets/img/share/sdu-online.png", 5, 911);
     }).then(function () {
         return new Promise(function (resolve, reject) {
             if(operation === "share") {
-                ctx.fillRect(270, 760, 250, 80);
-                ctx.font = "20px san-serif";
-                ctx.fillStyle = "#000000";
-                ctx.fillText("扫码答题", 275, 790);
-                ctx.fillText("解锁新春签语", 275, 820);
-                drawImageFile(ctx, "../assets/img/share/qr.jpg", 400, 710).then(resolve);
+                drawImageFile(ctx, "../assets/img/share/qr.jpg", 415, 835).then(function () {
+                    return drawImageFile(ctx, "../assets/img/share/qr-text.png", 260, 912);
+                }).then(resolve);
             } else {
                 resolve();
             }
