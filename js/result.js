@@ -38,29 +38,15 @@ function getText(resultId) {
 }
 
 function setBgText(resultId) {
-    let bgImgUrl = [
-        "https://s2.loli.net/2022/01/27/wbTdUfQiZ75Wloj.jpg",
-        "https://s2.loli.net/2022/01/27/kY4hIyCGNDbHa3m.jpg",
-        "https://s2.loli.net/2022/01/27/GJZ548rEhHoI2Ye.jpg",
-        "https://s2.loli.net/2022/01/27/k71sdR23VgQbjeh.jpg",
-        "https://s2.loli.net/2022/01/27/XWa6AMD1jdPZuIm.jpg",
-    ];
-    let textImgUrl = [
-        "https://s2.loli.net/2022/01/27/eTcN2rXRIfL8tAo.png",
-        "https://s2.loli.net/2022/01/27/KWcPXTE9yuotYsA.png",
-        "https://s2.loli.net/2022/01/27/IcV78GxMuwlPtfy.png",
-        "https://s2.loli.net/2022/01/27/AOuTnUCFJKpjx6D.png",
-        "https://s2.loli.net/2022/01/27/SN357ILjxsKbVQ8.png",
-    ];
     if (resultId >= 0 && resultId <= 4) {
-        $("#mainly").append(`<img id='bg' src='${bgImgUrl[resultId]}' style=' position: absolute;z-index: -2;left: 0;top: 0;width: 10rem;' alt=''>`);
-        $("#header").append(`<img id='head-text' src='${textImgUrl[resultId]}' alt=''>`);
+        const name = ["dinner", "papercutting", "people", "tiger", "village"];
+        $("#mainly").append(`<img id='bg' src='../assets/img/result/${name[resultId]}-bg.jpg' alt=''>`);
+        $("#header").append(`<img id='head-text' src='../assets/img/result/${name[resultId]}-text.png' alt=''>`);
         getText(resultId);
     } else {
         $("#mainly").innerHTML = "<h>出错了</h>";
     }
 }
-
 
 // 加载完成执行：
 $(document).ready(function () {

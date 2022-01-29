@@ -34,8 +34,8 @@ function createSelectOption(e, t, n) {
         $(n).css("border-top-width", "0.5rem");
         $(n).css("border-bottom-width", "0");
         $("#box").fullpage.setAllowScrolling(false);
-        setTimeout("$('#box').fullpage.moveSectionDown()",300);
-        setTimeout("$('#box').fullpage.setAllowScrolling(true)",400);
+        setTimeout("$('#box').fullpage.moveSectionDown()", 300);
+        setTimeout("$('#box').fullpage.setAllowScrolling(true)", 400);
         selected[e] = t
     }
 }
@@ -80,7 +80,7 @@ function writeQuestions() {
     for (let n = 0; n < o.length; ++n) {
         for (let t = 0; t < 4; ++t) {
             let e = 1.7 + .3 * t;
-            $(i[n]).append("<p class = 'option-text option-text-" + ["A", "B", "C", "D"][t] + " wow fadeIn" + "'" + " data-wow-delay='" + e + "s'>" + questions[n]["answers"][t] + "</p>") 
+            $(i[n]).append("<p class = 'option-text option-text-" + ["A", "B", "C", "D"][t] + " wow fadeIn" + "'" + " data-wow-delay='" + e + "s'>" + questions[n]["answers"][t] + "</p>")
         }
     }
 }
