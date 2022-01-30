@@ -82,11 +82,9 @@ function createSelectOption(e, t, n) {
         selected[e] = t;
         if(isClick){}
         else{
+                        isClick=true;
             $("#box").fullpage.setAllowScrolling(false);
-            isClick=true;
             setTimeout("$('#box').fullpage.moveSectionDown()", 300);
-            setTimeout("$('#box').fullpage.setAllowScrolling(true)", 800);
-            setTimeout("isClick=false", 800);
         }
 
     }
@@ -109,10 +107,8 @@ function eventBind() {
     $("#start-button").on("click", function () {
         if(isClick){}
         else{
-            $("#box").fullpage.moveSectionDown();
-            $("#box").fullpage.setAllowScrolling(true);
-            isClick=1;
-            setTimeout("isClick=false", 800);
+            isClick=true;
+            setTimeout("$('#box').fullpage.moveSectionDown()", 300);
         }
     });
     $("#draw-button").on("click", function () {
@@ -126,17 +122,19 @@ function eventBind() {
                     window.open(e, "_self")
                 }, 1500);
             }
-            isClick=1;
-            setTimeout("isClick=false", 800);
+            isClick=true
         }
-    });
+    })
 }
 
 function pluginInit() {
-    $("#box").fullpage({scrollBar: true, resize: true, scrollingSpeed: 1e3});
+    $("#box").fullpage({scrollBar: true, resize: true, scrollingSpeed: 1e3,
+        afterLoad:function(){
+        isClick=false;
+        $("#box").fullpage.setAllowScrolling(true)
+    }});
     let e = new WOW({boxClass: "wow", animateClass: "animated", offset: 0, mobile: true, live: true});
     e.init();
-    $("#box").fullpage.setAllowScrolling(false);
 }
 
 $(document).ready(function () {
