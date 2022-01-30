@@ -15,7 +15,7 @@ mkdir "./docs"
 echo "compressing js files..."
 mkdir "./docs/js"
 for i in $(ls ./js/*); do
-  uglifyjs "$i" -o "./docs/js/${i##*/}"
+  uglifyjs "$i" -m -c -o "./docs/js/${i##*/}"
 done
 
 # CSS files
