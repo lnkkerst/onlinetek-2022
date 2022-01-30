@@ -13,6 +13,20 @@ function reAnimate(e, t) {
     }(t))
 }
 
+function banClick(ms) {
+    ms = ms || 0;
+    $("#shield").show();
+    setTimeout("$('#shield').hide()", ms);
+}
+
+function banScroll(ms) {
+    ms = ms || 0;
+    $("#box").fullpage.setAutoScrolling(false);
+    $("#box").fullpage.setKeyboardScrolling(false);
+    setTimeout("$(\"#box\").fullpage.setAutoScrolling(true);", ms);
+    setTimeout("$(\"#box\").fullpage.setKeyboardScrolling(true);", ms);
+}
+
 function getRandQuestion(e) {
     e = typeof e === "number" ? e : 5;
     return questionList.sort(function () {
@@ -67,10 +81,11 @@ function writeQuestions() {
         }
     }
 }
-let isClick= false;
 
 function createSelectOption(e, t, n) {
     return function () {
+        banClick(1300);
+        banScroll(1300);
         $(this).parent().children().css("border-top-width", "0");
         $(this).parent().children().css("border-bottom-width", "0.5rem");
         $(this).css("border-top-width", "0.5rem");
@@ -80,13 +95,7 @@ function createSelectOption(e, t, n) {
         $(n).css("border-top-width", "0.5rem");
         $(n).css("border-bottom-width", "0");
         selected[e] = t;
-        if(isClick){}
-        else{
-                        isClick=true;
-            $("#box").fullpage.setAllowScrolling(false);
-            setTimeout("$('#box').fullpage.moveSectionDown()", 300);
-        }
-
+        setTimeout("$('#box').fullpage.moveSectionDown()", 300);
     }
 }
 
@@ -105,43 +114,45 @@ function eventBind() {
         }
     }
     $("#start-button").on("click", function () {
-        if(isClick){}
-        else{
-            isClick=true;
-            setTimeout("$('#box').fullpage.moveSectionDown()", 300);
-        }
+        $("#box").fullpage.moveSectionDown();
+        $("#box").fullpage.setAllowScrolling(true)
     });
     $("#draw-button").on("click", function () {
-        if(isClick){}
-        else{
-            let t = getResultId();
-            if (t !== "error") {
-                reAnimate("#wobble-box", "wobble");
-                setTimeout(function () {
-                    let e = "result/index.html?result=" + t;
-                    window.open(e, "_self")
-                }, 1500);
-            }
-            isClick=true
+        let t = getResultId();
+        if (t !== "error") {
+            reAnimate("#wobble-box", "wobble");
+            setTimeout(function () {
+                let e = "result/index.html?result=" + t;
+                window.open(e, "_self")
+            }, 1500);
         }
     })
 }
 
 function pluginInit() {
-    $("#box").fullpage({scrollBar: true, resize: true, scrollingSpeed: 1e3,
-        afterLoad:function(){
-        isClick=false;
-        $("#box").fullpage.setAllowScrolling(true)
-    }});
-    let e = new WOW({boxClass: "wow", animateClass: "animated", offset: 0, mobile: true, live: true});
+    $("#box").fullpage({
+        scrollBar: true,
+        resize: true,
+        scrollingSpeed: 1e3,
+        recordHistory: false,
+    });
+    let e = new WOW({
+        boxClass: "wow",
+        animateClass: "animated",
+        offset: 0,
+        mobile: true,
+        live: true,
+    });
     e.init();
 }
 
 $(document).ready(function () {
     $(".loading").hide();
+    $("#shield").hide();
     setRem();
     questions = getRandQuestion();
     pluginInit();
     writeQuestions();
-    eventBind()
+    eventBind();
+    $("#box").fullpage.setAllowScrolling(false);
 });
