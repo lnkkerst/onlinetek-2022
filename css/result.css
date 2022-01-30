@@ -22,7 +22,7 @@
 #text-block {
     top: 22%;
     position: absolute;
-    width: 10rem;
+    width: 100%;
     height: 10rem;
     display: flex;
     justify-content: center;
@@ -48,7 +48,7 @@
 #foot {
     position: absolute;
     bottom: 1rem;
-    width: 10rem;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -57,7 +57,7 @@
 
 #transparent {
     position: absolute;
-    width: 10rem;
+    width: 100%;
     z-index: -1
 }
 
