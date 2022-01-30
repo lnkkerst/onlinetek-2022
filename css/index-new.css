@@ -18,13 +18,11 @@ html, body {
 }
 
 .option {
+    border-bottom: .5rem solid rgba(0, 0, 0, 0);
+    border-top: 0 solid rgba(0, 0, 0, 0);
     width: 2rem;
 }
 
-.option, .option-text {
-    border-bottom: .5rem solid rgba(0, 0, 0, 0);
-    border-top: 0 solid rgba(0, 0, 0, 0);
-}
 
 .fp-tableCell {
     width: 100%;
@@ -43,11 +41,11 @@ html, body {
 #start-bottom img {
     position: absolute;
     width: 100%;
-    bottom: 0;
+    bottom: 0
 }
 
 #start-top {
-    width: 100%;
+    width: 100%
 }
 
 #start-button {
@@ -57,23 +55,24 @@ html, body {
     justify-content: center;
     align-items: center;
     position: absolute;
-    z-index: 2;
+    z-index: 2
 }
 
 #start-button img {
-    width: 60%;
+    width: 60%
 }
 
 .question-box {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
 }
 
 .img-question {
     margin-top: .3rem;
     width: 9rem;
-    height: 9rem;
+    height: 9rem
 }
 
 .question-text {
@@ -87,22 +86,20 @@ html, body {
     align-items: center;
     justify-content: flex-start;
     color: #dca96d;
-    font-family: 'XingKai', serif;
+    font-family: 'XingKai', serif
 }
 
 .option-box {
     width: 100%;
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    align-items: center
 }
 
-.option-box p {
-    margin-bottom: .4rem;
-}
-
-.option-box img {
-    width: 2rem;
+.option {
+    border-bottom: .5rem solid rgba(0, 0, 0, 0);
+    border-top: 0 solid rgba(0, 0, 0, 0);
+    width: 2rem
 }
 
 .option-text-block {
@@ -112,11 +109,19 @@ html, body {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    font-size: .39rem;
     z-index: 2;
-    font-family: 'XingKai', serif;
+    font-family: 'XingKai', serif
 }
 
+.option-text {
+    font-size: .42rem;
+    margin-bottom: .2rem;
+    border-bottom: .5rem solid rgba(0, 0, 0, 0);
+    border-top: 0 solid rgba(0, 0, 0, 0);
+    width: .7rem;
+    text-align: center;
+    color:#dca96d
+}
 .decoration-bottom {
     position: absolute;
     bottom: 3%;
@@ -124,15 +129,15 @@ html, body {
     justify-content: space-around;
     align-items: flex-end;
     width: 100%;
-    height: 2.5rem;
+    height: 2.5rem
 }
 
 .decoration-bottom img {
-    width: 2rem;
+    width: 2rem
 }
 
 #special-img {
-    width: 3.5rem;
+    width: 3.5rem
 }
 
 #draw-item {
@@ -142,21 +147,14 @@ html, body {
     margin-top: 4.2rem;
     margin-left: .5rem;
     margin-bottom: 1.4rem;
-    width: 5rem;
+    width: 5rem
 }
 
 #draw-button img {
-    width: 100%;
+    width: 100%
 }
 
-.option-text {
-    border-bottom: .5rem solid rgba(0, 0, 0, 0);
-    border-top: 0 solid rgba(0, 0, 0, 0);
-    width: .7rem;
-    text-align: center;
-}
-
-@media screen and (max-height: 950px) and (max-width: 450px) {
+@media screen and (max-height: 951px) and (max-width: 451px) {
     .img-question {
         margin-top: 1rem !important;
         width: 10rem !important;
@@ -176,7 +174,7 @@ html, body {
         width: 2.2rem !important
     }
 
-    .option-box img {
+    .option{
         width: 2.2rem !important
     }
 
@@ -195,7 +193,7 @@ html, body {
     }
 }
 
-@media screen and (max-height: 800px) and (max-width: 450px) {
+@media screen and (max-height: 801px) and (max-width: 451px) {
     .question-box {
         height: 9rem !important
     }
@@ -209,10 +207,6 @@ html, body {
 
     .option-box {
         margin-bottom: 1rem !important
-    }
-
-    .option-box img {
-        width: 2rem !important
     }
 
     #draw-item {
@@ -230,12 +224,12 @@ html, body {
     }
 }
 
-@media screen and (max-height: 700px) and (max-width: 400px) {
+@media screen and (max-height: 701px) and (max-width: 401px) {
     .img-question {
         margin-top: 0 !important;
         margin-bottom: 0 !important;
         width: 9rem !important;
-        height: 9rem !important;
+        height: 9rem !important
     }
 
     .question-box {
@@ -245,9 +239,6 @@ html, body {
     .question-text {
         margin-top: .15rem !important;
         font-size: .4rem !important
-    }
-    .option-box img {
-        width: 2rem !important
     }
 
     #draw-item {
@@ -303,7 +294,7 @@ html, body {
         font-size: .35rem
     }
 
-    .option-box img {
+    .option{
         width: 1.5rem !important
     }
 
@@ -323,5 +314,14 @@ html, body {
     #draw-item {
         margin-top: 2.5rem;
         margin-bottom: .5rem
+    }
+}
+
+@media (prefers-color-scheme: dark){
+    .question-text {
+        color: #dca96d
+    }
+    .option-text{
+        color:#dca96d
     }
 }
