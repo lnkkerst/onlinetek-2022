@@ -23,23 +23,6 @@ function getRandQuestion(e) {
 let questions;
 let selected = [-1, -1, -1, -1, -1];
 
-function createSelectOption(e, t, n) {
-    return function () {
-        $(this).parent().children().css("border-top-width", "0");
-        $(this).parent().children().css("border-bottom-width", "0.5rem");
-        $(this).css("border-top-width", "0.5rem");
-        $(this).css("border-bottom-width", "0");
-        $(n).parent().children().css("border-top-width", "0");
-        $(n).parent().children().css("border-bottom-width", "0.5rem");
-        $(n).css("border-top-width", "0.5rem");
-        $(n).css("border-bottom-width", "0");
-        $("#box").fullpage.setAllowScrolling(false);
-        setTimeout("$('#box').fullpage.moveSectionDown()", 300);
-        setTimeout("$('#box').fullpage.setAllowScrolling(true)", 400);
-        selected[e] = t
-    }
-}
-
 function getResultId() {
     for (let t = 0; t < selected.length; ++t) {
         if (selected[t] === -1) {
@@ -84,6 +67,30 @@ function writeQuestions() {
         }
     }
 }
+let isClick= false;
+
+function createSelectOption(e, t, n) {
+    return function () {
+        $(this).parent().children().css("border-top-width", "0");
+        $(this).parent().children().css("border-bottom-width", "0.5rem");
+        $(this).css("border-top-width", "0.5rem");
+        $(this).css("border-bottom-width", "0");
+        $(n).parent().children().css("border-top-width", "0");
+        $(n).parent().children().css("border-bottom-width", "0.5rem");
+        $(n).css("border-top-width", "0.5rem");
+        $(n).css("border-bottom-width", "0");
+        selected[e] = t;
+        if(isClick){}
+        else{
+            $("#box").fullpage.setAllowScrolling(false);
+            isClick=true;
+            setTimeout("$('#box').fullpage.moveSectionDown()", 300);
+            setTimeout("$('#box').fullpage.setAllowScrolling(true)", 800);
+            setTimeout("isClick=false", 800);
+        }
+
+    }
+}
 
 function eventBind() {
     let e = $(".option-box");
@@ -100,17 +107,27 @@ function eventBind() {
         }
     }
     $("#start-button").on("click", function () {
-        $("#box").fullpage.moveSectionDown();
-        $("#box").fullpage.setAllowScrolling(true)
+        if(isClick){}
+        else{
+            $("#box").fullpage.moveSectionDown();
+            $("#box").fullpage.setAllowScrolling(true);
+            isClick=1;
+            setTimeout("isClick=false", 800);
+        }
     });
     $("#draw-button").on("click", function () {
-        let t = getResultId();
-        if (t !== "error") {
-            reAnimate("#wobble-box", "wobble");
-            setTimeout(function () {
-                let e = "result/index.html?result=" + t;
-                window.open(e, "_self")
-            }, 1500);
+        if(isClick){}
+        else{
+            let t = getResultId();
+            if (t !== "error") {
+                reAnimate("#wobble-box", "wobble");
+                setTimeout(function () {
+                    let e = "result/index.html?result=" + t;
+                    window.open(e, "_self")
+                }, 1500);
+            }
+            isClick=1;
+            setTimeout("isClick=false", 800);
         }
     });
 }
