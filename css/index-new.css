@@ -18,7 +18,7 @@ html, body {
     width: 1rem;
     display: flex;
     border-radius: 50%;
-    z-index: 99;
+    z-index: 128;
     align-items: center;
     justify-content: center;
 }
@@ -387,4 +387,13 @@ html, body {
     background-color: rgba(0, 0, 0, 0);
     opacity: 0;
     z-index: 110;
+}
+
+#iframe-result {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    border: 0;
 }

@@ -76,6 +76,12 @@ function bgmInit() {
     }
 }
 
+function showResultInIframe(url) {
+    url = url || "result/?result=0"
+    $("body").append(`<iframe id="iframe-result" src="${url}"><script>window.open(url, "_self")</script></iframe>`);
+
+}
+
 function banClick(ms) {
     ms = ms || 0;
     $("#shield").show();
@@ -189,7 +195,9 @@ function eventBind() {
             reAnimate("#wobble-box", "wobble");
             setTimeout(function () {
                 let e = "result/index.html?result=" + t;
-                window.open(e, "_self")
+                // window.open(e, "_self")
+                showResultInIframe(e);
+                $("#box").hide();
             }, 1500);
         }
     });
