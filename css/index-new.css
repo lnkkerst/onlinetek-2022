@@ -17,19 +17,15 @@ html, body {
     height: 1rem;
     width: 1rem;
     display: flex;
-    background-color: rgba(128, 128, 128, 0.6);
-    opacity: 0.6;
     border-radius: 50%;
-    border: 0.05rem solid #333333;
     z-index: 99;
     align-items: center;
     justify-content: center;
 }
 
 #bgm-box img {
-    margin-right: 0.05rem;
-    width: 0.6rem;
-    height: 0.6rem;
+    width: 1rem;
+    height: 1rem;
 }
 
 .loop {
