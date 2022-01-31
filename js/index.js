@@ -24,28 +24,32 @@ function bgmToggle() {
     let bgm = document.getElementById('bgm');
     if (!bgm.paused) {
         document.getElementById('bgm').pause();
-        document.getElementById('bgm-box').classList.remove('loop');
+        $("#bgm-img").hide();
+        $("#bgm-img-muted").show();
+
     } else {
         document.getElementById('bgm').play();
-        document.getElementById('bgm-box').classList.add('loop');
+        $("#bgm-img").show();
+        $("#bgm-img-muted").hide();
     }
 }
 
 function bgmOn() {
     let bgm = document.getElementById('bgm');
     document.getElementById('bgm').play();
-    document.getElementById('bgm-box').classList.add('loop');
+    $("#bgm-img").show();
+    $("#bgm-img-muted").hide();
 }
 
 function bgmOff() {
     let bgm = document.getElementById('bgm');
     document.getElementById('bgm').pause();
-    document.getElementById('bgm-box').classList.remove('loop');
+    $("#bgm-img").hide();
+    $("#bgm-img-muted").show();
 }
 
 function wxBgmAutoPlay(id) {
     let audio = document.getElementById(id);
-    audio.play();
     document.addEventListener("WeixinJSBridgeReady", function () {
         audio.play();
     }, false);
@@ -59,13 +63,15 @@ function bgmInit() {
     let bgm = document.getElementById('bgm');
     if (!bgm.paused) {
         isBgmAutoPlayed = true;
-        document.getElementById('bgm-box').classList.add('loop');
+        $("#bgm-img").show();
+        $("#bgm-img-muted").hide();
     } else {
         bgm.play();
         wxBgmAutoPlay("bgm");
         if (!bgm.paused) {
             isBgmAutoPlayed = true;
-            document.getElementById('bgm-box').classList.add('loop');
+            $("#bgm-img").show();
+            $("#bgm-img-muted").hide();
         }
     }
 }
@@ -208,13 +214,26 @@ function pluginInit() {
 }
 
 $(document).ready(function () {
-    $(".loading").hide();
-    $("#shield").hide();
+    $("#box, #bgm-box, #shield").hide();
     setRem();
     questions = getRandQuestion();
     pluginInit();
     writeQuestions();
     eventBind();
+    let loaderId = setInterval(function () {
+        let imgs = document.querySelectorAll("img");
+        let loaded = true;
+        for(let i = 0; i < imgs.length; ++i) {
+            if(!imgs[i].complete) {
+                loaded = false;
+            }
+        }
+        if(loaded) {
+            $(".loading").hide();
+            $("#box, #bgm-box").show();
+            clearInterval(loaderId);
+        }
+    }, 200);
     bgmInit();
     $("#box").fullpage.setAllowScrolling(false);
 });

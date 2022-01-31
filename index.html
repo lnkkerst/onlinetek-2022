@@ -41,10 +41,11 @@
     </div>
 </div>
 
-<!--左上角那个音乐播放按钮-->
+<!--右上角那个音乐播放按钮-->
 <div class="ripple" id="bgm-box">
-    <audio autoplay="autoplay" id="bgm" loop="loop" preload="none" src="assets/audio/bgm.mp3"></audio>
-    <img alt="M" src="assets/img/misc/bgm.png"/>
+    <audio autoplay="autoplay" id="bgm" loop="loop" preload="auto" src="assets/audio/bgm.mp3"></audio>
+    <img id="bgm-img-muted" alt="M" src="assets/img/misc/bgm-muted.png"/>
+    <img id="bgm-img" alt="M" src="assets/img/misc/bgm.png" hidden/>
 </div>
 
 <div id="shield"></div>
