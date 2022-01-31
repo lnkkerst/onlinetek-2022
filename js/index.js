@@ -1,3 +1,7 @@
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual'
+}
+
 function setRem() {
     let e = document.documentElement.clientWidth / 10;
     let t = document.documentElement.clientHeight + "px";
@@ -11,6 +15,59 @@ function reAnimate(e, t) {
             $(this).removeClass("animated " + e)
         }
     }(t))
+}
+
+let isBgmAutoPlayed = false;
+
+// 切换背景音乐播放状态
+function bgmToggle() {
+    let bgm = document.getElementById('bgm');
+    if (!bgm.paused) {
+        document.getElementById('bgm').pause();
+        document.getElementById('bgm-box').classList.remove('loop');
+    } else {
+        document.getElementById('bgm').play();
+        document.getElementById('bgm-box').classList.add('loop');
+    }
+}
+
+function bgmOn() {
+    let bgm = document.getElementById('bgm');
+    document.getElementById('bgm').play();
+    document.getElementById('bgm-box').classList.add('loop');
+}
+
+function bgmOff() {
+    let bgm = document.getElementById('bgm');
+    document.getElementById('bgm').pause();
+    document.getElementById('bgm-box').classList.remove('loop');
+}
+
+function wxBgmAutoPlay(id) {
+    let audio = document.getElementById(id);
+    audio.play();
+    document.addEventListener("WeixinJSBridgeReady", function () {
+        audio.play();
+    }, false);
+    document.addEventListener("YixinJSBridgeReady", function () {
+        audio.play();
+    }, false);
+}
+
+// 检测背景音乐有没有自动播放
+function bgmInit() {
+    let bgm = document.getElementById('bgm');
+    if (!bgm.paused) {
+        isBgmAutoPlayed = true;
+        document.getElementById('bgm-box').classList.add('loop');
+    } else {
+        bgm.play();
+        wxBgmAutoPlay("bgm");
+        if (!bgm.paused) {
+            isBgmAutoPlayed = true;
+            document.getElementById('bgm-box').classList.add('loop');
+        }
+    }
 }
 
 function banClick(ms) {
@@ -115,7 +172,10 @@ function eventBind() {
     }
     $("#start-button").on("click", function () {
         $("#box").fullpage.moveSectionDown();
-        $("#box").fullpage.setAllowScrolling(true)
+        $("#box").fullpage.setAllowScrolling(true);
+        if (!isBgmAutoPlayed) {
+            bgmOn();
+        }
     });
     $("#draw-button").on("click", function () {
         let t = getResultId();
@@ -126,7 +186,8 @@ function eventBind() {
                 window.open(e, "_self")
             }, 1500);
         }
-    })
+    });
+    $("#bgm-box").click(bgmToggle);
 }
 
 function pluginInit() {
@@ -154,5 +215,6 @@ $(document).ready(function () {
     pluginInit();
     writeQuestions();
     eventBind();
+    bgmInit();
     $("#box").fullpage.setAllowScrolling(false);
 });
